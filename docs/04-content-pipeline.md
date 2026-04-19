@@ -48,7 +48,7 @@ Pipeline is idempotent — re-running on the same source yields the same Firesto
 
 A single-source corpus overfits to one pedagogy. The corpus draws from multiple teaching traditions so the retrieval layer surfaces the method diversity the graph exposes:
 
-- **Math Tutor DVD** full course bundle (K–12+ video lesson transcripts)
+- **Licensed K–12+ video lesson transcripts** (full-course bundle covering arithmetic through calculus)
 - **OpenStax** textbooks (college-level math + science)
 - **MIT OpenCourseWare** (select college-level coverage)
 - **Curated worksheet libraries** (K–12 problem sets)

@@ -8,7 +8,7 @@ Explanova is a data-science product disguised as a tutoring app. The retrieval l
 
 ## Corpus engineering
 
-- **Curated a 10,476-entry K–12+ corpus** from Math Tutor DVD, OpenStax, MIT OCW, and open curriculum sources. Balanced across six grade bands (K–2 through college) so the retrieval layer works at every level, not just the easy ones.
+- **Curated a 10,476-entry K–12+ corpus** from licensed video-lesson transcripts, OpenStax, MIT OCW, and open curriculum sources. Balanced across six grade bands (K–2 through college) so the retrieval layer works at every level, not just the easy ones.
 - **Source-diverse by design.** A single-source corpus overfits to one pedagogy. Multiple traditions mean multiple valid methods per topic.
 - **Idempotent ingestion pipeline.** Re-running on a corrected source yields the same Firestore state. No cascading duplicates on re-ingest.
 - **Provenance-tagged chunks.** Every chunk knows where it came from, so the graph can surface "method A from source X, method B from source Y" when pedagogies diverge.
