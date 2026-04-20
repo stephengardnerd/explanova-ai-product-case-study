@@ -244,6 +244,6 @@ COL  ▓▓▓▓▓▓▓▓▓▓▓             ~1,200
 ## Author
 
 **Stephen D. Gardner** — Founder, Explanova
-Navy veteran (2002–2008) · DMV-based · parent
+U.S. Navy veteran (2002–2008) · DMV-based · parent
 
 [explanova.ai](https://explanova.ai)
