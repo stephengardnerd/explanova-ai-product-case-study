@@ -1,6 +1,6 @@
 # Explanova — AI Product Case Study
 
-> A parent's AI avatar that teaches K–12+ STEM homework on a virtual whiteboard, grounded in a curated 10,476-entry knowledge corpus and a production GraphRAG retrieval layer.
+> A parent's AI avatar that teaches K–12+ S.T.E.M. homework on a virtual whiteboard, grounded in a curated 10,476-entry knowledge corpus and a production GraphRAG retrieval layer.
 
 **🚀 Live demo:** **[explanova.ai](https://explanova.ai)**
 
