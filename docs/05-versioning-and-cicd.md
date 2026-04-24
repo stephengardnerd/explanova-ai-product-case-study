@@ -90,4 +90,4 @@ Running Explanova solo, the changelog + tag history is my external brain. Every 
 
 That's the discipline the next engineer on this codebase — or the next hiring manager reading this — should be able to see at a glance.
 
-→ Back to [README](../README.md)
+→ Next: [06 — Business + pricing](06-business-and-pricing.md)

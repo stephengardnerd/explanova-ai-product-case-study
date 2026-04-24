@@ -142,7 +142,7 @@ The 5-task pipeline isn't five LLM calls — it's a supervised agent loop:
 
 A separate **custom dev-support agent built with Google ADK (Agent Development Kit)** handled task triage, code review delegation, and review/test coordination during the build itself — investing in the build process the way a senior engineer invests in better CI tooling.
 
-→ Methodology: [docs/skills/agentic-ai.md](skills/agentic-ai.md)
+→ Methodology: [docs/skills/agentic-ai.md](docs/skills/agentic-ai.md)
 
 ## Avatar video composition
 

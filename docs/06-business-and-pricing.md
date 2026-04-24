@@ -99,4 +99,4 @@ Every billing-relevant change (tier migration, plan rename, refund, comp grant) 
 
 Stripe pinned + secret-rotated + webhook-validated + scripted-migration · SendGrid with custom domain auth + per-recipient-domain deliverability QA · four-tier SKU strategy with intentional renames · community pricing as values + market positioning · multi-model cost routing + caching + quota tracking. **The product is engineered to work as a business at scale, not just to demo well.**
 
-→ Next: [05 — Versioning and CI/CD](05-versioning-and-cicd.md)
+→ Back to [README](../README.md)
