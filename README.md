@@ -56,6 +56,17 @@ This repository is the **public case study** behind the product. It walks throug
 
 ---
 
+## Built with Claude Code · Runs on GCP
+
+This product was developed using [Claude Code](https://www.anthropic.com/claude-code) on macOS as the primary build environment — architecture decisions, schema design, code generation, structured-output discipline, and the multi-tier safety pipeline were all reasoned through with Claude as the architect-in-the-loop. Production runtime then deploys to Google Cloud Platform: **Gemini 3 Pro Preview** as the primary reasoning model, **Vertex AI** embeddings, **Cloud Run** + **Cloud Build** + **Firebase**, with **Claude Sonnet** as the deliberate multi-vendor failover.
+
+The runtime stack is multi-vendor by design. The build stack is Anthropic-native. See [docs/07-trust-and-safety.md](docs/07-trust-and-safety.md) for how that architectural discipline translates into shipped product behavior.
+
+![Built with Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-D97706?style=flat-square&logo=anthropic&logoColor=white)
+![Runs on GCP](https://img.shields.io/badge/Runs_on-Google_Cloud-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+
+---
+
 ## The journey at a glance
 
 ```mermaid
@@ -140,6 +151,14 @@ Every shipped change is tagged, every deploy names its Cloud Run revision, and e
 A lot of AI demos are technically impressive and economically broken. Explanova has Stripe billing (four-SKU tier model with scripted migrations), SendGrid email with custom-domain deliverability, community-pricing posture for military/teacher/low-income families, and a multi-model AI routing strategy that keeps cost-per-completed-lesson defensible.
 
 → Business + pricing + cost discipline: [docs/06-business-and-pricing.md](docs/06-business-and-pricing.md)
+
+### 8. Trust & Safety as product architecture
+
+A generative-AI tutor for children is a high-stakes deployment. Every output that reaches the whiteboard travels through a **five-tier defense pipeline**: schema-strict input validation → grounding-first retrieval with provenance tags → schema-strict structured output with per-primitive guards → multi-LLM safety classifier for third-party content → multi-vendor failover ladder. Backed by BigQuery observability with three alert tiers and a disaster-recovery runbook with documented rollback contingencies for every safety-relevant integration.
+
+The architecture is provider-agnostic by design — built on Gemini today, swappable to Claude as primary by configuration rather than rewrite.
+
+→ Trust & Safety architecture: [docs/07-trust-and-safety.md](docs/07-trust-and-safety.md)
 
 ---
 
