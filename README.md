@@ -6,7 +6,7 @@
 
 ### Try it in 10 seconds
 
-| [▶ Interactive demo](https://explanova.ai/demo) | [🌐 Web app](https://explanova.ai) | [ App Store](https://apps.apple.com/app/id6788622274) | [▶ Google Play](https://play.google.com/store/apps/details?id=com.explanova.app) |
+| <img src="images/icon-explanova.png" width="30" alt=""><br>[**Interactive demo**](https://explanova.ai/demo) | <img src="images/icon-explanova.png" width="30" alt=""><br>[**Web app**](https://explanova.ai) | [<img src="images/badge-app-store.svg" width="140" alt="Download Explanova on the App Store">](https://apps.apple.com/app/id6788622274) | [<img src="images/badge-google-play.png" width="161" alt="Get Explanova on Google Play">](https://play.google.com/store/apps/details?id=com.explanova.app) |
 |:---:|:---:|:---:|:---:|
 | <img src="images/qr-demo.png" width="150" alt="QR code to the Explanova interactive demo"> | <img src="images/qr-web.png" width="150" alt="QR code to explanova.ai"> | <img src="images/qr-app-store.png" width="150" alt="QR code to Explanova on the App Store"> | <img src="images/qr-google-play.png" width="150" alt="QR code to Explanova on Google Play"> |
 | No install, no account | Full app in a browser | iPhone + iPad | Android |
