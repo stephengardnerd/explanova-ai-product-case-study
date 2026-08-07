@@ -1,4 +1,4 @@
-# 🧪 Data Science — Skills Exercised
+# 🧪 Data Science: Skills Exercised
 
 ← [Back to README](../../README.md)
 
@@ -25,12 +25,12 @@ Modeled the K–12 math curriculum as a typed property graph in Neo4j:
 
 - **6 grade bands × 30 quarters × 80 topics × 133 methods × 129 SOL codes**
 - **445 typed relationships** across `HAS_QUARTER`, `COVERS`, `USES_METHOD`, `ALIGNS_TO`, `PREREQUISITE`
-- Designed the edge vocabulary explicitly — typed edges, not generic "related to" — so the graph can drive pedagogically meaningful expansion (`USES_METHOD` surfaces sibling methods; `PREREQUISITE` surfaces gaps)
+- Designed the edge vocabulary explicitly, typed edges, not generic "related to", so the graph can drive pedagogically meaningful expansion (`USES_METHOD` surfaces sibling methods; `PREREQUISITE` surfaces gaps)
 
 ## Classification + grade-band calibration
 
-- **Constrained subject taxonomy** (15 subjects, 7 grade bands) — bounded the classification problem enough that the task runs at ≥90% accuracy
-- **Adjacent-band fallback** with a stricter similarity threshold (0.48) than exact-band (0.45), tuned empirically across three Cloud Run revisions to balance recall vs. false-positives. Tuning log was kept — **0.55 (too strict) → 0.50 (still missed the signal) → 0.48 (captures cross-band, stays above the exact-band floor)**.
+- **Constrained subject taxonomy** (15 subjects, 7 grade bands), bounded the classification problem enough that the task runs at ≥90% accuracy
+- **Adjacent-band fallback** with a stricter similarity threshold (0.48) than exact-band (0.45), tuned empirically across three Cloud Run revisions to balance recall vs. false-positives. Tuning log was kept, **0.55 (too strict) → 0.50 (still missed the signal) → 0.48 (captures cross-band, stays above the exact-band floor)**.
 - Cross-band matches are **demoted to `partially_grounded`** with a methodNote so the avatar frames age-appropriately, rather than silently teaching off-level.
 
 ## Benchmark methodology
@@ -47,11 +47,11 @@ Every prompt was scored against a held-out benchmark before promotion:
 
 Success thresholds: ≥95% correctness, ≥90% classification, ≥85% strong-or-partial grounding, **zero incorrect answers with high confidence.**
 
-**RAG vs. pure-generation ablation.** Ran the benchmark twice — with corpus retrieval and without — to quantify the delta. That delta is the measurable dollar value of the content library.
+**RAG vs. pure-generation ablation.** Ran the benchmark twice, with corpus retrieval and without, to quantify the delta. That delta is the measurable dollar value of the content library.
 
-## Grounding provenance — observability into the model
+## Grounding provenance: observability into the model
 
-Every response carries a `groundingQuality ∈ {grounded, partially_grounded, ungrounded}` tag. The frontend surfaces that to the parent. No grounded-looking answer ships from an ungrounded retrieval — epistemic honesty is a product feature.
+Every response carries a `groundingQuality ∈ {grounded, partially_grounded, ungrounded}` tag. The frontend surfaces that to the parent. No grounded-looking answer ships from an ungrounded retrieval, epistemic honesty is a product feature.
 
 ## Output-schema discipline
 
@@ -59,6 +59,6 @@ Discriminated-union JSON schemas (`anyOf` per primitive type) eliminate the clas
 
 ## What this rolls up to
 
-Corpus engineering + embedding strategy + knowledge-graph design + classification calibration + benchmark discipline + grounding provenance + schema discipline — that's the data-science spine of the product. It's what makes the retrieval layer actually *work* rather than *appear* to work.
+Corpus engineering + embedding strategy + knowledge-graph design + classification calibration + benchmark discipline + grounding provenance + schema discipline, that's the data-science spine of the product. It's what makes the retrieval layer actually *work* rather than *appear* to work.
 
 → Next skill: [⚙️ DevOps](devops.md)
