@@ -4,9 +4,22 @@
 
 **🚀 Live demo:** **[explanova.ai](https://explanova.ai)**
 
+### Try it in 10 seconds
+
+| [▶ Interactive demo](https://explanova.ai/demo) | [🌐 Web app](https://explanova.ai) | [ App Store](https://apps.apple.com/app/id6788622274) | [▶ Google Play](https://play.google.com/store/apps/details?id=com.explanova.app) |
+|:---:|:---:|:---:|:---:|
+| <img src="images/qr-demo.png" width="150" alt="QR code to the Explanova interactive demo"> | <img src="images/qr-web.png" width="150" alt="QR code to explanova.ai"> | <img src="images/qr-app-store.png" width="150" alt="QR code to Explanova on the App Store"> | <img src="images/qr-google-play.png" width="150" alt="QR code to Explanova on Google Play"> |
+| No install, no account | Full app in a browser | iPhone + iPad | Android |
+
+The demo needs no sign-up: it runs a worked problem end to end so you can see the
+whiteboard teaching before deciding whether to install anything.
+
+
 ![Status](https://img.shields.io/badge/status-live_in_production-10b981?style=for-the-badge)
 ![Version](https://img.shields.io/badge/version-v3.5.4-4f46e5?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/UX_tests-78%2F78_passing-22c55e?style=for-the-badge)
+![App Store](https://img.shields.io/badge/App_Store-live-0D96F6?style=for-the-badge&logo=appstore&logoColor=white)
+![Google Play](https://img.shields.io/badge/Google_Play-live-34A853?style=for-the-badge&logo=googleplay&logoColor=white)
 
 **AI:**
 ![Gemini](https://img.shields.io/badge/Gemini_3_Pro-4285F4?style=flat-square&logo=google&logoColor=white)
@@ -30,6 +43,14 @@
 ![Corpus](https://img.shields.io/badge/RAG_corpus-10%2C476_entries-6366f1?style=flat-square)
 ![KG](https://img.shields.io/badge/Knowledge_graph-445_relationships-6366f1?style=flat-square)
 
+**Mobile:**
+![Capacitor](https://img.shields.io/badge/Capacitor_8-119EFF?style=flat-square&logo=capacitor&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=apple&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)
+![Xcode Cloud](https://img.shields.io/badge/Xcode_Cloud-147EFB?style=flat-square&logo=xcode&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=gradle&logoColor=white)
+![RevenueCat](https://img.shields.io/badge/RevenueCat-F25A5A?style=flat-square)
+
 **Frontend + business:**
 ![React](https://img.shields.io/badge/React_18-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -48,7 +69,7 @@
 |---|---|
 | **What it is** | A generative-AI tutoring SaaS where a parent's cloned avatar (face + voice + likeness) explains the child's homework, step-by-step, on an animated whiteboard. |
 | **Why it matters** | Closes the $60–100/hr private-tutor gap for working families — built by a Navy veteran and parent in the DMV who lived the problem. |
-| **Status** | Live in production at [explanova.ai](https://explanova.ai). 16 semver releases (v1.0.0 → v3.5.4). 78/78 automated UX validation tests passing across desktop + mobile viewports. |
+| **Status** | Live on **three surfaces**: the web app at [explanova.ai](https://explanova.ai), the **App Store** (shipped 2026-08-03) and **Google Play** (shipped 2026-08-06). One React bundle, wrapped per platform by Capacitor. 78/78 automated UX validation tests passing across desktop + mobile viewports. |
 | **My role** | Sole founder, product owner, and technical lead — ideation through production deployment. |
 | **Stack signals** | **Gemini 3 Pro Preview** (32K thinking budget) primary · **Gemini 3 Flash Preview** ingestion · **Gemini 2.5 Flash** GraphRAG summaries · **Claude Sonnet** failover · **Vertex AI** (`text-embedding-004` + Generative Models) · **Google Cloud TTS** (Neural2-F, ADC-authenticated, rate-limited) · **Google ADK** (Agent Development Kit — built a custom dev-support agent for the build process) · **GraphRAG** (Neo4j + community detection) · **Agentic AI orchestration** (plan → verify → execute with supervised LLM agents) · **Firebase** (Hosting · Functions · Firestore · Auth · App Check + reCAPTCHA v3) · **Cloud Run · Cloud Build · Cloud Secret Manager** · React + TypeScript + Tailwind · Playwright UX validation · FFmpeg + HeyGen + Seedance for avatar composition. |
 
@@ -161,6 +182,71 @@ The architecture is provider-agnostic by design — built on Gemini today, swapp
 → Trust & Safety architecture: [docs/07-trust-and-safety.md](docs/07-trust-and-safety.md)
 
 ---
+
+### 9. One codebase, three surfaces
+
+Going native did not mean rewriting the product. Explanova is a single React +
+TypeScript bundle that **Capacitor** wraps in a thin native shell per platform:
+`npx cap sync ios` populates an Xcode project, `npx cap sync android` populates a
+Gradle project, and both host the identical web build.
+
+The two toolchains share nothing else. Android builds with Gradle and the Android
+SDK from the command line; iOS builds through **Xcode Cloud** on Apple's runners
+rather than locally, because the dev Mac runs a beta macOS whose build stamp trips
+ITMS-90111 at submission.
+
+The payoff showed up under pressure. When a compliance fix was needed across every
+surface, it was written once in one component and reached web, iOS and Android
+with no platform-specific code. The only per-platform work was rebuild and
+resubmit.
+
+The seam that does exist is worth naming: native cannot load an embedded YouTube
+player directly, because `capacitor://localhost` is not a valid web origin and the
+player refuses to configure against it. That is solved with an https shim page the
+native shells point at. It also means a measurement taken in a browser does not
+prove the native surface, so verification has to happen inside each shell.
+
+### 10. Shipping to two stores
+
+Both stores went live within 72 hours of each other, and they fail in different
+ways.
+
+**Apple** reviews the binary and the metadata together, checks the privacy,
+support and account-deletion URLs, and rejects on things a test suite cannot see.
+Three rejections in one earlier cycle traced to a single root cause: a build-time
+environment variable that was not being inlined, so a paywall shipped dark and the
+reviewer saw an invite gate instead of prices. The fix was not the variable, it
+was making the build **fail loudly** when the key is missing rather than shipping
+a silently degraded app.
+
+**Google Play** burns a version code the moment a bundle is uploaded, not when it
+is released, and a consumed code can never be reused. An abandoned upload
+therefore costs you a number. Play also treats managed publishing as a separate
+gate, so an approved release still waits for a human press.
+
+Both lessons are the same shape: the store's model of your release is not the one
+you hold in your head, and the cheapest way to learn the difference is to write it
+down the first time it bites.
+
+### 11. Compliance as engineering, not paperwork
+
+A third-party API compliance review arrived mid-launch with six items against the
+video-recommendation feature. Answering it well turned out to be an engineering
+exercise rather than a writing one.
+
+Two things mattered. First, every answer was measured rather than asserted: icon
+dimensions read off the rendered element, player size measured at the narrowest
+breakpoint, cache expiry traced to the line of code that enforces it. Second, the
+reply disclosed a real defect the audit had **not** found. The documented 24-hour
+cache limit was enforced on read but never actually deleted anything, so expired
+rows lingered. Claiming a clean history would not have survived their own audit
+trail, and the fix (a database TTL policy) was a day's work against a
+relationship that gates API access entirely.
+
+The reusable lesson was about evidence, not policy: a screen recording produced as
+proof turned out to have **no audio track at all**, which was invisible until the
+media tracks were probed directly. Evidence needs verifying like any other
+artifact.
 
 ## Skill domains exercised
 
