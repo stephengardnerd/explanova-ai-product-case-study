@@ -1,4 +1,4 @@
-# Technical Architecture — Explanova
+# Technical Architecture: Explanova
 
 > Architecture overview for the live production system at [explanova.ai](https://explanova.ai).
 > This document describes *what* the system does and *how* the pieces fit. Implementation code lives in a separate private repository.
@@ -9,23 +9,23 @@
 
 ```mermaid
 flowchart TB
-    subgraph client["🖥️ Client — React + TypeScript + Tailwind"]
+    subgraph client["🖥️ Client, React + TypeScript + Tailwind"]
         UI[Parent / Child dashboard]
         WB[Whiteboard player]
     end
 
-    subgraph functions["☁️ Firebase Cloud Functions — App Check · reCAPTCHA v3"]
+    subgraph functions["☁️ Firebase Cloud Functions, App Check · reCAPTCHA v3"]
         SH[solveHomework<br/>Gemini 3 Pro · 32K thinking]
         SS[synthesizeSpeech<br/>Cloud TTS Neural2-F]
         SW[Stripe webhook<br/>signature-validated]
         IP[inviteParent<br/>SendGrid dispatch]
     end
 
-    subgraph ai["🤖 AI Pipeline — 5 tasks · RAG-grounded"]
+    subgraph ai["🤖 AI Pipeline, 5 tasks · RAG-grounded"]
         T1[1 Extract] --> T2[2 Classify] --> T3[3 Explain] --> T4[4 Practice] --> T5[5 Avatar script]
     end
 
-    subgraph retrieval["🕸️ GraphRAG — Cloud Run"]
+    subgraph retrieval["🕸️ GraphRAG, Cloud Run"]
         VE[Vertex AI<br/>text-embedding-004]
         NEO[(Neo4j<br/>80 topics · 445 edges)]
         CS[Community<br/>summary cache]
@@ -75,7 +75,7 @@ flowchart TB
 ## Frontend
 
 - **React + TypeScript + Tailwind CSS**, Vite-built, deployed to **Firebase Hosting**
-- Discriminated-union typed primitives for the whiteboard renderer (each math primitive renders deterministically — no LLM-driven HTML)
+- Discriminated-union typed primitives for the whiteboard renderer (each math primitive renders deterministically, no LLM-driven HTML)
 - Framer Motion for element-level entrance animations on whiteboard primitives (counters appear one by one, jump arcs trace via `pathLength`, fraction strips fill L→R)
 - Authentication: Email/Password, Google, Apple
 - App Check (reCAPTCHA v3) enforced on every callable function
@@ -103,11 +103,11 @@ Five tasks run in sequence on every homework question:
 | Failover | **Claude Sonnet** | Triggered on Gemini timeout, low confidence, or out-of-curriculum classification |
 | External grounding | **Perplexity** | Bounded to current-events / NASA-style queries with mandatory source citations |
 
-**Hard constraint:** structured output via JSON schema with `anyOf` per-primitive branches. Each branch declares its own `required` fields. The model can satisfy one branch or fail validation — no silent partial outputs.
+**Hard constraint:** structured output via JSON schema with `anyOf` per-primitive branches. Each branch declares its own `required` fields. The model can satisfy one branch or fail validation, no silent partial outputs.
 
 → Methodology: [docs/02-ai-prototyping-studio.md](docs/02-ai-prototyping-studio.md)
 
-## Retrieval — GraphRAG
+## Retrieval: GraphRAG
 
 Vector RAG was the v1 retrieval layer. It worked, but missed prerequisite gaps. The current production retrieval layer is a knowledge-graph-augmented RAG:
 
@@ -121,26 +121,26 @@ Why graph over pure vector: `long division` should reach for `partial quotients`
 
 → Methodology: [docs/03-graphrag-methodology.md](docs/03-graphrag-methodology.md)
 
-## Voice synthesis — Google Cloud TTS
+## Voice synthesis: Google Cloud TTS
 
 The whiteboard mode narrates lesson steps via **Google Cloud Text-to-Speech** with the **Neural2-F** voice (en-US). Specifics:
 
 - `@google-cloud/text-to-speech` SDK, **lazy-loaded inside the function handler** so the deployment container never poisons module-level cold-start if ADC permissions are misaligned
-- **ADC (Application Default Credentials)** used automatically — no service-account keys in source
+- **ADC (Application Default Credentials)** used automatically, no service-account keys in source
 - **4,000-character rate limit per transaction** (Cloud TTS hard limit)
 - **Daily quotas tracked in the `tts_quota` Firestore collection** so we can detect runaway usage before it becomes a billing surprise
 - **App Check enforced** on the synthesizer Cloud Function (no anonymous calls)
-- Used as the **interactive fallback path** when LiveAvatar fails or is disabled — students never see an error; they transition seamlessly into Whiteboard mode with synchronized TTS narration per step
+- Used as the **interactive fallback path** when LiveAvatar fails or is disabled, students never see an error; they transition seamlessly into Whiteboard mode with synchronized TTS narration per step
 
 ## Agentic AI orchestration
 
-The 5-task pipeline isn't five LLM calls — it's a supervised agent loop:
+The 5-task pipeline isn't five LLM calls, it's a supervised agent loop:
 
-- **Plan** — model emits a structured plan with primitive selection and expected schema branch
-- **Verify** — schema validation (`anyOf` per primitive) + grounding-quality check against retrieved context
-- **Execute** — only on a verified plan; failures surface as typed errors, never as malformed UI
+- **Plan**: model emits a structured plan with primitive selection and expected schema branch
+- **Verify**: schema validation (`anyOf` per primitive) + grounding-quality check against retrieved context
+- **Execute**: only on a verified plan; failures surface as typed errors, never as malformed UI
 
-A separate **custom dev-support agent built with Google ADK (Agent Development Kit)** handled task triage, code review delegation, and review/test coordination during the build itself — investing in the build process the way a senior engineer invests in better CI tooling.
+A separate **custom dev-support agent built with Google ADK (Agent Development Kit)** handled task triage, code review delegation, and review/test coordination during the build itself, investing in the build process the way a senior engineer invests in better CI tooling.
 
 → Methodology: [docs/skills/agentic-ai.md](docs/skills/agentic-ai.md)
 
@@ -186,4 +186,4 @@ The parent's avatar is composed from multiple specialized providers and assemble
 
 ---
 
-**Author:** Stephen D. Gardner — [explanova.ai](https://explanova.ai)
+**Author:** Stephen D. Gardner, [explanova.ai](https://explanova.ai)
