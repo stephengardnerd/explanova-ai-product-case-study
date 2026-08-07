@@ -16,7 +16,7 @@ whiteboard teaching before deciding whether to install anything.
 
 
 ![Status](https://img.shields.io/badge/status-live_in_production-10b981?style=for-the-badge)
-![Version](https://img.shields.io/badge/version-v3.5.4-4f46e5?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v3.39.46-4f46e5?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/UX_tests-78%2F78_passing-22c55e?style=for-the-badge)
 ![App Store](https://img.shields.io/badge/App_Store-live-0D96F6?style=for-the-badge&logo=appstore&logoColor=white)
 ![Google Play](https://img.shields.io/badge/Google_Play-live-34A853?style=for-the-badge&logo=googleplay&logoColor=white)
@@ -163,7 +163,7 @@ Retrieval is only as good as what's behind it. I built a content ingestion pipel
 
 ### 6. Versioning + CI/CD discipline
 
-Every shipped change is tagged, every deploy names its Cloud Run revision, and every entry in the changelog explains the *why*, not just the *what*. The full progression from `v1.0.0` to `v3.5.4` (16 tags) is the artifact of disciplined release engineering on a one-person team.
+Every shipped change is tagged, every deploy names its Cloud Run revision, and every entry in the changelog explains the *why*, not just the *what*. The full progression from `v1.0.0` to `v3.39.46` (176 tags) is the artifact of disciplined release engineering on a one-person team.
 
 → Release engineering: [docs/05-versioning-and-cicd.md](docs/05-versioning-and-cicd.md)
 
@@ -267,9 +267,9 @@ Architecture overview: [TECHNICAL.md](TECHNICAL.md)
 <tr>
 <td align="center" width="25%">
 
-### 🚀 16
-**Production releases**
-v1.0.0 → v3.5.4
+### 🚀 176
+**Tagged releases**
+v1.0.0 → v3.39.46
 
 </td>
 <td align="center" width="25%">
