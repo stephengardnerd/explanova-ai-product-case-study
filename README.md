@@ -1,4 +1,4 @@
-# Explanova — AI Product Case Study
+# Explanova: AI Product Case Study
 
 > A parent's AI avatar that teaches K–12+ S.T.E.M. homework on a virtual whiteboard, grounded in a curated 10,476-entry knowledge corpus and a production GraphRAG retrieval layer.
 
@@ -59,7 +59,7 @@ whiteboard teaching before deciding whether to install anything.
 ![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white)
 ![SendGrid](https://img.shields.io/badge/SendGrid-1A82E2?style=flat-square&logo=sendgrid&logoColor=white)
 
-![Explanova today — live production app](images/10-today-app-live.png)
+![Explanova today, live production app](images/10-today-app-live.png)
 
 ---
 
@@ -68,18 +68,18 @@ whiteboard teaching before deciding whether to install anything.
 | | |
 |---|---|
 | **What it is** | A generative-AI tutoring SaaS where a parent's cloned avatar (face + voice + likeness) explains the child's homework, step-by-step, on an animated whiteboard. |
-| **Why it matters** | Closes the $60–100/hr private-tutor gap for working families — built by a Navy veteran and parent in the DMV who lived the problem. |
+| **Why it matters** | Closes the $60–100/hr private-tutor gap for working families, built by a Navy veteran and parent in the DMV who lived the problem. |
 | **Status** | Live on **three surfaces**: the web app at [explanova.ai](https://explanova.ai), the **App Store** (shipped 2026-08-03) and **Google Play** (shipped 2026-08-06). One React bundle, wrapped per platform by Capacitor. 78/78 automated UX validation tests passing across desktop + mobile viewports. |
-| **My role** | Sole founder, product owner, and technical lead — ideation through production deployment. |
-| **Stack signals** | **Gemini 3 Pro Preview** (32K thinking budget) primary · **Gemini 3 Flash Preview** ingestion · **Gemini 2.5 Flash** GraphRAG summaries · **Claude Sonnet** failover · **Vertex AI** (`text-embedding-004` + Generative Models) · **Google Cloud TTS** (Neural2-F, ADC-authenticated, rate-limited) · **Google ADK** (Agent Development Kit — built a custom dev-support agent for the build process) · **GraphRAG** (Neo4j + community detection) · **Agentic AI orchestration** (plan → verify → execute with supervised LLM agents) · **Firebase** (Hosting · Functions · Firestore · Auth · App Check + reCAPTCHA v3) · **Cloud Run · Cloud Build · Cloud Secret Manager** · React + TypeScript + Tailwind · Playwright UX validation · FFmpeg + HeyGen + Seedance for avatar composition. |
+| **My role** | Sole founder, product owner, and technical lead, ideation through production deployment. |
+| **Stack signals** | **Gemini 3 Pro Preview** (32K thinking budget) primary · **Gemini 3 Flash Preview** ingestion · **Gemini 2.5 Flash** GraphRAG summaries · **Claude Sonnet** failover · **Vertex AI** (`text-embedding-004` + Generative Models) · **Google Cloud TTS** (Neural2-F, ADC-authenticated, rate-limited) · **Google ADK** (Agent Development Kit, built a custom dev-support agent for the build process) · **GraphRAG** (Neo4j + community detection) · **Agentic AI orchestration** (plan → verify → execute with supervised LLM agents) · **Firebase** (Hosting · Functions · Firestore · Auth · App Check + reCAPTCHA v3) · **Cloud Run · Cloud Build · Cloud Secret Manager** · React + TypeScript + Tailwind · Playwright UX validation · FFmpeg + HeyGen + Seedance for avatar composition. |
 
-This repository is the **public case study** behind the product. It walks through the methodology, decisions, and skill domains exercised — without exposing proprietary code.
+This repository is the **public case study** behind the product. It walks through the methodology, decisions, and skill domains exercised, without exposing proprietary code.
 
 ---
 
 ## Built with Claude Code · Runs on GCP
 
-This product was developed using [Claude Code](https://www.anthropic.com/claude-code) on macOS as the primary build environment — architecture decisions, schema design, code generation, structured-output discipline, and the multi-tier safety pipeline were all reasoned through with Claude as the architect-in-the-loop. Production runtime then deploys to Google Cloud Platform: **Gemini 3 Pro Preview** as the primary reasoning model, **Vertex AI** embeddings, **Cloud Run** + **Cloud Build** + **Firebase**, with **Claude Sonnet** as the deliberate multi-vendor failover.
+This product was developed using [Claude Code](https://www.anthropic.com/claude-code) on macOS as the primary build environment, architecture decisions, schema design, code generation, structured-output discipline, and the multi-tier safety pipeline were all reasoned through with Claude as the architect-in-the-loop. Production runtime then deploys to Google Cloud Platform: **Gemini 3 Pro Preview** as the primary reasoning model, **Vertex AI** embeddings, **Cloud Run** + **Cloud Build** + **Firebase**, with **Claude Sonnet** as the deliberate multi-vendor failover.
 
 The runtime stack is multi-vendor by design. The build stack is Anthropic-native. See [docs/07-trust-and-safety.md](docs/07-trust-and-safety.md) for how that architectural discipline translates into shipped product behavior.
 
@@ -103,11 +103,11 @@ flowchart LR
     style F fill:#dbeafe,stroke:#3b82f6
 ```
 
-## The story arc — ideation → production
+## The story arc: ideation → production
 
 ### 1. Founder origin
 
-I'm Stephen D. Gardner — a Navy veteran (2002–2008, Active Duty) and a parent in the DMV. The thing that started this product was sitting at the kitchen table watching my own kids struggle with homework that I could not always explain in real time. Private tutoring runs $60–100/hr. That price tag shouldn't decide who falls behind.
+I'm Stephen D. Gardner, a Navy veteran (2002–2008, Active Duty) and a parent in the DMV. The thing that started this product was sitting at the kitchen table watching my own kids struggle with homework that I could not always explain in real time. Private tutoring runs $60–100/hr. That price tag shouldn't decide who falls behind.
 
 So I built the tutor I wished we had: the **parent** explaining the homework, just as a synthesized version of themselves on screen, grounded in actual K–12 curriculum sources rather than free-form generation.
 
@@ -115,7 +115,7 @@ So I built the tutor I wished we had: the **parent** explaining the homework, ju
 
 ### 2. UI-first ideation in Google Stitch
 
-Before any code, I prototyped the entire surface area in **Google Stitch** to pressure-test whether a parent-avatar tutor *could* feel warm, simple, and trustworthy enough for a kitchen-table moment. Nine screens covering the full journey — landing, dashboard, avatar onboarding, homework upload, processing, the whiteboard delivery, and the archive of completed lessons.
+Before any code, I prototyped the entire surface area in **Google Stitch** to pressure-test whether a parent-avatar tutor *could* feel warm, simple, and trustworthy enough for a kitchen-table moment. Nine screens covering the full journey, landing, dashboard, avatar onboarding, homework upload, processing, the whiteboard delivery, and the archive of completed lessons.
 
 | Landing | Pricing | Parent dashboard |
 |---|---|---|
@@ -135,13 +135,13 @@ Why this mattered: it forced **product** decisions (subscription tiers, communit
 
 ### 3. AI prototyping in Google AI Studio
 
-Next stop: **Google AI Studio**. I prototyped the entire AI intelligence stack — every prompt, every JSON schema, every reasoning chain — *before* writing a single line of production code. Five tasks, run sequentially on every homework question:
+Next stop: **Google AI Studio**. I prototyped the entire AI intelligence stack, every prompt, every JSON schema, every reasoning chain, *before* writing a single line of production code. Five tasks, run sequentially on every homework question:
 
-1. **Extraction** — image/text → normalized problem JSON
-2. **Classification** — subject, topic, grade band, prerequisites, likely misconceptions
-3. **Explanation (RAG-grounded)** — short answer + hint + steps + simple analogy + similar example + practice questions
-4. **Practice** — 3–5 grade-appropriate variations
-5. **Avatar script** — warm, parent-voice teaching script with timed whiteboard cues
+1. **Extraction**: image/text → normalized problem JSON
+2. **Classification**: subject, topic, grade band, prerequisites, likely misconceptions
+3. **Explanation (RAG-grounded)**: short answer + hint + steps + simple analogy + similar example + practice questions
+4. **Practice**: 3–5 grade-appropriate variations
+5. **Avatar script**: warm, parent-voice teaching script with timed whiteboard cues
 
 Core principle: **retrieval before generation.** The model never answers from pure generation. It always retrieves from the curated concept library first, then generates a grounded response. That's what makes it trustworthy.
 
@@ -149,13 +149,13 @@ Core principle: **retrieval before generation.** The model never answers from pu
 
 ### 4. From vector RAG to GraphRAG
 
-The first production retrieval layer was vector-only: Vertex embeddings against a 10,476-entry corpus (textbook chapters, worked examples, OpenStax, MIT OCW). It worked. It also missed prerequisite gaps that pure cosine similarity can't catch — *long division* should reach for *partial quotients*, *area model*, and *estimation* even when the wording doesn't overlap.
+The first production retrieval layer was vector-only: Vertex embeddings against a 10,476-entry corpus (textbook chapters, worked examples, OpenStax, MIT OCW). It worked. It also missed prerequisite gaps that pure cosine similarity can't catch, *long division* should reach for *partial quotients*, *area model*, and *estimation* even when the wording doesn't overlap.
 
 So I migrated the retrieval layer to **GraphRAG**: a Neo4j knowledge graph with typed `COVERS` / `USES_METHOD` / `PREREQUISITE` edges across 6 grade bands × 30 quarters × 80 topics × 133 methods × 129 SOL codes (445 relationships). Queries traverse the graph, run community detection, and synthesize with the LLM. Smoke-tested end-to-end with documented `groundingQuality: "grounded"` provenance.
 
 → Methodology: [docs/03-graphrag-methodology.md](docs/03-graphrag-methodology.md)
 
-### 5. Content pipeline — building the corpus
+### 5. Content pipeline: building the corpus
 
 Retrieval is only as good as what's behind it. I built a content ingestion pipeline that processes textbooks, worksheets, and curated video lessons into normalized Firestore entries with embeddings, grade-band tagging, and topic classification. End state: **10,476 entries** spanning K–2 Early Learner through college, across `concept_library` and `worked_examples`.
 
@@ -163,11 +163,11 @@ Retrieval is only as good as what's behind it. I built a content ingestion pipel
 
 ### 6. Versioning + CI/CD discipline
 
-Every shipped change is tagged, every deploy names its Cloud Run revision, and every entry in the changelog explains the *why* — not just the *what*. The full progression from `v1.0.0` to `v3.5.4` (16 tags) is the artifact of disciplined release engineering on a one-person team.
+Every shipped change is tagged, every deploy names its Cloud Run revision, and every entry in the changelog explains the *why*, not just the *what*. The full progression from `v1.0.0` to `v3.5.4` (16 tags) is the artifact of disciplined release engineering on a one-person team.
 
 → Release engineering: [docs/05-versioning-and-cicd.md](docs/05-versioning-and-cicd.md)
 
-### 7. Business model — Stripe, SendGrid, tiered pricing, AI cost discipline
+### 7. Business model: Stripe, SendGrid, tiered pricing, AI cost discipline
 
 A lot of AI demos are technically impressive and economically broken. Explanova has Stripe billing (four-SKU tier model with scripted migrations), SendGrid email with custom-domain deliverability, community-pricing posture for military/teacher/low-income families, and a multi-model AI routing strategy that keeps cost-per-completed-lesson defensible.
 
@@ -177,7 +177,7 @@ A lot of AI demos are technically impressive and economically broken. Explanova 
 
 A generative-AI tutor for children is a high-stakes deployment. Every output that reaches the whiteboard travels through a **five-tier defense pipeline**: schema-strict input validation → grounding-first retrieval with provenance tags → schema-strict structured output with per-primitive guards → multi-LLM safety classifier for third-party content → multi-vendor failover ladder. Backed by BigQuery observability with three alert tiers and a disaster-recovery runbook with documented rollback contingencies for every safety-relevant integration.
 
-The architecture is provider-agnostic by design — built on Gemini today, swappable to Claude as primary by configuration rather than rewrite.
+The architecture is provider-agnostic by design, built on Gemini today, swappable to Claude as primary by configuration rather than rewrite.
 
 → Trust & Safety architecture: [docs/07-trust-and-safety.md](docs/07-trust-and-safety.md)
 
@@ -252,10 +252,10 @@ artifact.
 
 This product touched four distinct domains. Each has its own deep-dive:
 
-- **🧪 Data Science** — corpus engineering, knowledge-graph design, embedding strategy, benchmark methodology → [docs/skills/data-science.md](docs/skills/data-science.md)
-- **🤖 Agentic AI** — built a custom dev-support agent with **Google ADK**; orchestrated multi-model workflows (Gemini 3 Pro + 3 Flash + 2.5 Flash + Claude); plan → verify → execute supervision; structured-output discipline; retrieval-augmented agents → [docs/skills/agentic-ai.md](docs/skills/agentic-ai.md)
-- **⚙️ DevOps / GCP** — Cloud Run revision pinning, Cloud Build pipelines, Cloud Secret Manager, Firebase platform, App Check + reCAPTCHA v3, Cloud TTS with ADC + rate limiting, end-to-end UX validation (78/78 Playwright tests) → [docs/skills/devops.md](docs/skills/devops.md)
-- **🎯 AI Product Management** — phased roadmap, multi-provider failover policy, child-safety UX, subscription tiering, version-stamped milestone discipline → [docs/skills/ai-product-management.md](docs/skills/ai-product-management.md)
+- **🧪 Data Science**: corpus engineering, knowledge-graph design, embedding strategy, benchmark methodology → [docs/skills/data-science.md](docs/skills/data-science.md)
+- **🤖 Agentic AI**: built a custom dev-support agent with **Google ADK**; orchestrated multi-model workflows (Gemini 3 Pro + 3 Flash + 2.5 Flash + Claude); plan → verify → execute supervision; structured-output discipline; retrieval-augmented agents → [docs/skills/agentic-ai.md](docs/skills/agentic-ai.md)
+- **⚙️ DevOps / GCP**: Cloud Run revision pinning, Cloud Build pipelines, Cloud Secret Manager, Firebase platform, App Check + reCAPTCHA v3, Cloud TTS with ADC + rate limiting, end-to-end UX validation (78/78 Playwright tests) → [docs/skills/devops.md](docs/skills/devops.md)
+- **🎯 AI Product Management**: phased roadmap, multi-provider failover policy, child-safety UX, subscription tiering, version-stamped milestone discipline → [docs/skills/ai-product-management.md](docs/skills/ai-product-management.md)
 
 Architecture overview: [TECHNICAL.md](TECHNICAL.md)
 
@@ -348,7 +348,7 @@ COL  ▓▓▓▓▓▓▓▓▓▓▓             ~1,200
 
 ## Author
 
-**Stephen D. Gardner** — Founder, Explanova
+**Stephen D. Gardner**: Founder, Explanova
 U.S. Navy veteran (2002–2008) · DMV-based · parent
 
 [explanova.ai](https://explanova.ai)
